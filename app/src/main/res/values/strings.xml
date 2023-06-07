@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CineRikuy</string>
+    <!--Activity Intro -->
+    <string name="welcome">Bienvenido</string>
+    <string name="cine_name">CineRikuy</string>
+    <!--Activity Login -->
+    <string name="login">Login</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="btnLogin">Ingresar</string>
+    <string name="message">No tienes una cuenta?</string>
+    <string name="enlace">Crear Cuenta</string>
+    <!-- Activity Register-->
+    <string name="register">Registro</string>
+    <string name="name">Nombres</string>
+    <string name="lastName">Apellidos</string>
+    <string name="dni">DNI</string>
+    <string name="phone">Celular</string>
+    <string name="btnRegister">Registrar</string>
+</resources>
