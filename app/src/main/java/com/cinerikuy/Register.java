@@ -3,6 +3,7 @@ package com.cinerikuy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -105,7 +106,7 @@ public class Register extends AppCompatActivity {
                         ApiExceptionResponse errorResponse = gson.fromJson(response.errorBody().string(), ApiExceptionResponse.class);
                         if (errorResponse != null) {
                             String detail = errorResponse.getDetail();
-                            Toast.makeText(Register.this, detail, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this,detail, Toast.LENGTH_SHORT).show();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -115,7 +116,10 @@ public class Register extends AppCompatActivity {
 
                 CustomerResponse rs = response.body();
                 assert rs != null;
-                Toast.makeText(Register.this, rs.getUsername(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, "Usuario "+rs.getUsername() + " registrado correctamente", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override

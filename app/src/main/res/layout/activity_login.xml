@@ -72,7 +72,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/text_background"
-                    android:drawableStart="@drawable/user"
+                    android:drawableStart="@drawable/userperfil"
                     android:drawablePadding="16dp"
                     android:ems="10"
                     android:hint="@string/user"
@@ -81,6 +81,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"

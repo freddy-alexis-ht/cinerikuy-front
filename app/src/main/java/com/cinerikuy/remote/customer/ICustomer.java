@@ -15,5 +15,5 @@ public interface ICustomer {
     Call<CustomerResponse> sigInd(@Body CustomerSignInRequest request);
 
     @POST("login")
-    Call<CustomerResponse> login(CustomerLoginRequest request);
+    Call<CustomerResponse> login(@Body CustomerLoginRequest request);
 }
