@@ -17,4 +17,22 @@
     <string name="dni">DNI</string>
     <string name="phone">Celular</string>
     <string name="btnRegister">Registrar</string>
+    <!-- Nav Header-->
+    <string name="username">Username</string>
+    <!-- Nav Menu-->
+    <string name="home">Inicio</string>
+    <string name="movie">Películas</string>
+    <string name="candy">Dulceria</string>
+    <string name="vote">Votación</string>
+    <string name="account">Mi cuenta</string>
+    <string name="shopping">Mis compras</string>
+    <string name="help">Centro de ayuda</string>
+    <string name="use">Usar CineRikuy</string>
+    <string name="sesion">Cerrar Sesion</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Home -->
+
 </resources>
