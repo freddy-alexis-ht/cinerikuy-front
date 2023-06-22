@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:fitsSystemWindows="true"
-    tools:context=".NavigationActivity"
+    tools:context=".presenter.NavigationActivity"
     tools:openDrawer="start">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

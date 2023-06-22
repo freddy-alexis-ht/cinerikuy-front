@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0F2230"
-    tools:context=".Home">
+    tools:context=".presenter.Home">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slider_pager"
@@ -27,6 +30,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/slider_pager">
     </com.google.android.material.tabs.TabLayout>
+        <!--Boton -->
+        <Button
+            android:id="@+id/btnFiltro"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/btn_filtro_cinema"
+            android:drawableStart="@drawable/ic_location"
+            android:text="@string/btn_Filtro"
+            android:drawablePadding="8dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/indicator"
+            android:paddingStart="30dp"
+            android:gravity="center_vertical"/>
     <TextView
         android:textColor="#D9D9D9"
         android:id="@+id/textView"
@@ -36,14 +55,15 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="20sp"
         android:text="@string/movie"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnFiltro"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Rv_movies"
         android:layout_width="0dp"
@@ -57,5 +77,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

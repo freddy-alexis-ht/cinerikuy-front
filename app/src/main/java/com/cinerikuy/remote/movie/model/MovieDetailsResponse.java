@@ -4,15 +4,18 @@ import java.util.List;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 public class MovieDetailsResponse {
     private String movieCode;
     private String name;
     private String duration;
-    private int imageUrl;
+    private String imageUrl;
     private String trailerUrl;
+    private String imageCover;
     private String synopsis;
     private boolean peruvian;
     private String director;
@@ -22,9 +25,12 @@ public class MovieDetailsResponse {
     private String language;
     private String situation;
     private String vote;
+    //Valor que referencia a la imagen del trailer
+    //private int coverPhoto;
 
-    public MovieDetailsResponse(String movieCode, int imageUrl) {
-        this.movieCode = movieCode;
+    public MovieDetailsResponse(String name, String imageUrl) {
+        this.name = name;
         this.imageUrl = imageUrl;
     }
+
 }

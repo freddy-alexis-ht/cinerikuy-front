@@ -34,5 +34,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Home -->
+    <string name="moviesPopular">Peliculas Populares</string>
+    <string name="btn_Filtro">Elegir Cine</string>
+    <!--Movie Detail -->
+    <string name="btnComprar">Comprar</string>
+    <string name="title_sinopsis">Sinopsis</string>
+    <string name="title_idioma">Idioma</string>
+    <string name="title_genero">Genero</string>
+    <string name="title_directo">Director</string>
+    <string name="title_actor">Actores</string>
+    <string name="subtitulo">Subtitulado</string>
+    <string name="doblado">Doblado</string>
+    <string name="sinopsis">Después de encontrar un cuerpo anfitrión en el periodista de investigación Eddie Brock, el simbionte alienígena debe enfrentarse a un nuevo enemigo, Carnage, el alter ego del asesino en serie Cletus Kasady.</string>
 
 </resources>

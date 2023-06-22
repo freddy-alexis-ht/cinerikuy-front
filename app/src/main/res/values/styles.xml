@@ -2,6 +2,8 @@
 <resources>
     <style name="NavigationViewItemTextAppearance" parent="@android:style/TextAppearance">
 
-
+    </style>
+    <style  name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowEnterTransition">@transition/slide_from_bottom</item>
     </style>
 </resources>

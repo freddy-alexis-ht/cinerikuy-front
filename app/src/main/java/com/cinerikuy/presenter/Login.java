@@ -1,4 +1,4 @@
-package com.cinerikuy;
+package com.cinerikuy.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cinerikuy.R;
 import com.cinerikuy.remote.customer.ICustomer;
 import com.cinerikuy.remote.customer.exceptions.ApiExceptionResponse;
 import com.cinerikuy.remote.customer.model.CustomerLoginRequest;
@@ -78,7 +79,7 @@ public class Login extends AppCompatActivity {
         });
     }
     public void login(CustomerLoginRequest request) {
-        /*Retrofit retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constans.BACKEND_CUSTOMER)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -100,21 +101,21 @@ public class Login extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     return;
-                }
-                CustomerResponse rs = response.body();
-                assert rs != null;
-                Toast.makeText(Login.this, "Bienvenido " + rs.getUsername(), Toast.LENGTH_SHORT).show();
-            }
 
+                } else {
+                    CustomerResponse rs = response.body();
+                    assert rs != null;
+                    Toast.makeText(Login.this, "Bienvenido " + rs.getUsername(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this, NavigationActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
             @Override
             public void onFailure(Call<CustomerResponse> call, Throwable t) {
                 Log.e("Throw Error:", t.getMessage());
             }
-        });*/
-        Intent intent = new Intent(Login.this, NavigationActivity.class);
-        startActivity(intent);
-        finish();
-
+        });
     }
     TextWatcher textWatcher = new TextWatcher() {
         @Override
