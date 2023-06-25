@@ -10,7 +10,9 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/CineRikuy/app/src/main/res/drawable/user.xml" value="0.2865" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/CineRikuy/app/src/main/res/layout/activity_login.xml" value="0.28442028985507245" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/CineRikuy/app/src/main/res/layout/activity_main.xml" value="0.28442028985507245" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable-mdpi/bg_horario_selected.xml" value="0.2725" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/bg_filter_location.xml" value="0.3265" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/bg_horario.xml" value="0.2735" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/btn_background.xml" value="0.328" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/btn_cancelar.xml" value="0.3225" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/btn_comprar.xml" value="0.328" />
@@ -38,6 +40,7 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_movie.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_movie_player.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_ticket_purchase.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/item_actors.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/item_movie.xml" value="0.23233695652173914" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/layout_filter_location.xml" value="0.30085470085470084" />

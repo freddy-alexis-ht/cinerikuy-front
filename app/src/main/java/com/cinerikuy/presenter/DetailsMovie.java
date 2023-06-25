@@ -7,30 +7,24 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cinerikuy.MoviePlayer;
 import com.cinerikuy.R;
+import com.cinerikuy.TicketPurchase;
 import com.cinerikuy.remote.movie.IMovie;
-import com.cinerikuy.remote.movie.model.Actor;
-import com.cinerikuy.remote.movie.model.MovieBillboardResponse;
 import com.cinerikuy.remote.movie.model.MovieDetailsResponse;
 import com.cinerikuy.utilty.Constans;
-import com.cinerikuy.utilty.adapters.ActorAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +38,8 @@ public class DetailsMovie extends Fragment {
     private TextView movieName, movieSinopsis, movieGenero,movieDirector, movieDuration, movieIdioma, movieUrlTrailer, movieActors;
     private FloatingActionButton play;
     private IMovie movieService;
+    private Button btnComprar;
+    private String movieCode;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,7 +71,27 @@ public class DetailsMovie extends Fragment {
             }
         });
 
+        btnComprar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Mandar los datos
+                Fragment fragmentTicketPurchase = newInstancePurchase(movieCode);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragmentTicketPurchase);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         return view;
+    }
+    public static TicketPurchase newInstancePurchase(String movieCode) {
+        TicketPurchase fragment = new TicketPurchase();
+        Bundle args = new Bundle();
+        args.putString("movieCode", movieCode);
+        fragment.setArguments(args);
+        return fragment;
     }
     /**
      * Metodo que carga los atributos para ser enviados a otro fragment
@@ -100,13 +116,13 @@ public class DetailsMovie extends Fragment {
         movieIdioma = view.findViewById(R.id.subtitulo);
         movieUrlTrailer = view.findViewById(R.id.url_Trailer);
         movieActors = view.findViewById(R.id.movide_detail_actors);
+        btnComprar = view.findViewById(R.id.btnComprar);
         movieUrlTrailer.setVisibility(view.GONE);
 
         //Obtenermos los valores
         Bundle args = getArguments();
         if (args != null) {
-            String movieCode = args.getString("movieCode");
-            int imgCover = args.getInt("imagenCover");
+            movieCode = args.getString("movieCode");
             movieImageView.setTransitionName(args.getString("sharedName"));
             getDetailsMovieBackend(movieCode);
             play.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.scale_animation));

@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Actor {
-    private String name;
-    private int img;
-
+public class Schedule {
+    private String schedule;
 }

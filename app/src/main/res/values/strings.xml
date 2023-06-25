@@ -46,5 +46,11 @@
     <string name="subtitulo">Subtitulado</string>
     <string name="doblado">Doblado</string>
     <string name="sinopsis">Después de encontrar un cuerpo anfitrión en el periodista de investigación Eddie Brock, el simbionte alienígena debe enfrentarse a un nuevo enemigo, Carnage, el alter ego del asesino en serie Cletus Kasady.</string>
+    <!--Ticket Purchase -->
+    <string name="name_cine">Nombre del Local</string>
+    <string name="title_cantidad">Cantidad</string>
+    <string name="title_total">Total</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_continue">Continuar</string>
 
 </resources>
