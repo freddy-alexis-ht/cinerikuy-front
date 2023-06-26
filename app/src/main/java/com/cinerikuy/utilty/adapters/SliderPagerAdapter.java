@@ -1,6 +1,5 @@
 package com.cinerikuy.utilty.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,21 +8,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cinerikuy.R;
-import com.cinerikuy.utilty.Slide;
+import com.cinerikuy.utilty.Slider;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
 public class SliderPagerAdapter extends RecyclerView.Adapter<SliderPagerAdapter.SliderViewHolder> {
     private ViewPager2 viewPager2;
-    private List<Slide> mList;
+    private List<Slider> mList;
     private TabLayout indicator;
 
-    public SliderPagerAdapter(ViewPager2 viewPager2, List<Slide> mList, TabLayout indicator) {
+    public SliderPagerAdapter(ViewPager2 viewPager2, List<Slider> mList, TabLayout indicator) {
         this.viewPager2 = viewPager2;
         this.mList = mList;
         this.indicator = indicator;
@@ -47,7 +45,7 @@ public class SliderPagerAdapter extends RecyclerView.Adapter<SliderPagerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-        Slide slide = mList.get(position);
+        Slider slide = mList.get(position);
         holder.slideImage.setImageResource(slide.getImage());
         holder.slideText.setText(slide.getTitle());
     }

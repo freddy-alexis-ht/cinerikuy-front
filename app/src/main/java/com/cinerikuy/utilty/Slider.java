@@ -7,8 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Slide {
+public class Slider {
     private int image;
     private String title;
-
 }

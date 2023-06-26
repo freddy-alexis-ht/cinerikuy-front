@@ -10,19 +10,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cinerikuy.R;
+import com.cinerikuy.remote.movie.model.MovieBillboardResponse;
 import com.cinerikuy.remote.movie.model.MovieDetailsResponse;
+import com.cinerikuy.utilty.listener.MovieItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
     Context context;
-    List<MovieDetailsResponse> movies;
+    List<MovieBillboardResponse> movies;
+    MovieItemClickListener movieItemClickListener;
 
-    public MovieAdapter(Context context, List<MovieDetailsResponse> movies) {
+    public MovieAdapter(Context context, List<MovieBillboardResponse> movies, MovieItemClickListener listener) {
         this.context = context;
         this.movies = movies;
+        movieItemClickListener = listener;
     }
 
     @NonNull
@@ -35,7 +41,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(movies.get(position).getName());
-        holder.imgMovie.setImageResource(movies.get(position).getImageUrl());
+        holder.code.setText(movies.get(position).getMovieCode());
+        String imgUrl = movies.get(position).getImageUrl();
+        Glide.with(holder.itemView.getContext())
+                .load(imgUrl)
+                .into(holder.imgMovie);
     }
 
     @Override
@@ -45,13 +55,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView title;
+        private TextView title, code;
         private ImageView imgMovie;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.item_movie_title);
             imgMovie = itemView.findViewById(R.id.item_movie_img);
+            code = itemView.findViewById(R.id.item_movie_code);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    movieItemClickListener.onMovieClick(movies.get(getAdapterPosition()),imgMovie);
+                }
+            });
         }
     }
 }

@@ -17,16 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".NavigationActivity"
+            android:name=".presenter.NavigationActivity"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".presenter.Register"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".presenter.Login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".presenter.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

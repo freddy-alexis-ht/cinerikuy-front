@@ -1,4 +1,4 @@
-package com.cinerikuy;
+package com.cinerikuy.presenter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -8,13 +8,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cinerikuy.R;
+import com.cinerikuy.utilty.Constans;
 import com.google.android.material.navigation.NavigationView;
 
-public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
             navigationView.setCheckedItem(R.id.home);
         }
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -62,7 +67,10 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 Toast.makeText(this, "Cerrando sesion", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.help:
-                Toast.makeText(this, "Ruta del manual", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Como usar CineRikuy", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(Constans.URL_MANUAL_USER));
+                startActivity(intent);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

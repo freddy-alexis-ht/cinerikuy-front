@@ -1,7 +1,6 @@
-package com.cinerikuy;
+package com.cinerikuy.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cinerikuy.R;
 import com.cinerikuy.remote.customer.ICustomer;
 import com.cinerikuy.remote.customer.exceptions.ApiExceptionResponse;
 import com.cinerikuy.remote.customer.model.CustomerResponse;
@@ -23,12 +23,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
