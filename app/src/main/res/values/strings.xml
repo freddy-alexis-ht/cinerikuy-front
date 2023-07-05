@@ -52,5 +52,10 @@
     <string name="title_total">Total</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_continue">Continuar</string>
-
+    <!--Informative Biometric -->
+    <string name="message_biometric">¡Nueva Funcionalidad de\nAutenticación por Huella\nDactilar!</string>
+    <string name="btn_how">¿Cómo usar?</string>
+    <!--How Use -->
+    <string name="message_howuse">Es simple. Solo necesitas registrar tu\nhuella dactilar una vez y, a partir de ahí,\npodrás iniciar sesión con solo un toque.\nOlvídate de recordar contraseñas complicadas.\n¡Tu huella dactilar es tu clave de acceso!</string>
+    <string name="btn_acept">Aceptar</string>
 </resources>

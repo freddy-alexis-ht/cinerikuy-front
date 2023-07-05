@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.15.1'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.15.1'
 
-    //Dependencia de API YOUTUBE
-    //implementation 'com.google.android.youtube:youtube-android-player:15.0.1' // Reemplaza con la versión más reciente
+    //Dependencia de animacion
+    implementation 'com.airbnb.android:lottie:3.0.1'
+    //Dependencia para BiometricAuthentication
+    implementation 'androidx.biometric:biometric:1.1.0'
 }

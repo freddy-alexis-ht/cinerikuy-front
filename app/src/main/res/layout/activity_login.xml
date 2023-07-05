@@ -145,7 +145,14 @@
                     android:textColor="#000"
                     android:textStyle="bold" />
             </LinearLayout>
-
+            <ImageView
+                android:id="@+id/btn_fingerprint"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_fingerprint"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"/>
         </LinearLayout>
     </ScrollView>
 
