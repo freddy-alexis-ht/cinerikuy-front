@@ -122,32 +122,11 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"/>
         <LinearLayout
+            android:id="@+id/containerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/cantidadProductos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7"
-                android:layout_weight="0"
-                android:textColor="#fff"
-                android:layout_marginStart="5dp"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/unid_entradas"
-                android:textColor="#fff"/>
-            <TextView
-                android:id="@+id/precioTotalProductos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
-                android:text="S/.20.00"
-                android:textColor="#fff"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,6 +142,7 @@
                 android:layout_marginStart="5dp"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

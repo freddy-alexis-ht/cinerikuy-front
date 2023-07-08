@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface ICinema {
 
-    @GET("cinemas")
+    @GET("/cinemas")
     Call<List<CinemaResponse>> findAll();
 
     @GET("/cinemaCode/{cinemaCode}")

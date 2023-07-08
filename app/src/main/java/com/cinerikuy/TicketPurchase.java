@@ -42,10 +42,14 @@ import com.cinerikuy.remote.movie.IMovie;
 import com.cinerikuy.remote.movie.model.MovieBillboardResponse;
 import com.cinerikuy.remote.movie.model.MovieDetailsResponse;
 import com.cinerikuy.remote.movie.model.Schedule;
+import com.cinerikuy.remote.transaction.ITransaction;
+import com.cinerikuy.remote.transaction.model.TransactionTicketRequest;
 import com.cinerikuy.utilty.Constans;
 import com.cinerikuy.utilty.adapters.ScheduleAdapter;
 import com.cinerikuy.utilty.listener.ScheduleItemClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -69,13 +73,14 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
     private TextView txtCantidad, txtTotal;
     private Button btnCancel, btnContinuar, btnFiltro;
     private ImageView plus, minus;
-    private int precio = 13;
+    private int precio;
     private int value;
     private int precioTotal;
     private ICinema cinemaService;
     private String cinemaCode;
     private String cinemaName = "";
     private String horario = "";
+    private ITransaction transactionService;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -97,6 +102,13 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
             int cant = Integer.parseInt(txtCantidad.getText().toString());
             if (!StringUtils.isBlank(name) && !StringUtils.isBlank(horario) && cant >0) {
                 Toast.makeText(getActivity(), "Campos elegidos - " + horario, Toast.LENGTH_SHORT).show();
+
+                //Guardamos en SharedPreference
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("horario",horario);
+                editor.apply();
+                registeTransactionTicket();
                 Fragment fragmentDetailMovie = newInstance(precioTotal);
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -119,7 +131,7 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("numberTicket",txtCantidad.getText().toString());
-            editor.putString("precioTotal",txtTotal.getText().toString());
+            editor.putString("precioTotal",String.valueOf(precioTotal));
             editor.apply();
         });
 
@@ -136,7 +148,7 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("numberTicket",txtCantidad.getText().toString());
-                editor.putString("precioTotal",txtTotal.getText().toString());
+                editor.putString("precioTotal",String.valueOf(precioTotal));
                 editor.apply();
             }
         });
@@ -146,6 +158,49 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
         });
         return view;
     }
+
+    private void registeTransactionTicket() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String username = sharedPreferences.getString("username","value1");
+        String movieCode = sharedPreferences.getString("movieCode","");
+        String cinemaCode = sharedPreferences.getString("cinemaCode","");
+        String horario = sharedPreferences.getString("horario","");
+        String cantidadEntradas = sharedPreferences.getString("numberTicket","");
+        TransactionTicketRequest request = TransactionTicketRequest.builder()
+                .username(username)
+                .cinemaCode(cinemaCode)
+                .movieCode(movieCode)
+                .movieSchedule(horario)
+                .movieNumberOfTickets(Integer.parseInt(cantidadEntradas))
+                .build();
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constans.BACKEND_TRANSACTION)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        transactionService = retrofit.create(ITransaction.class);
+        Call<String> call = transactionService.buyTickets(request);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()) {
+                    String result = response.body();
+                    Log.i("RESPONSE", result);
+                    Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e("Error-", t.getMessage());
+            }
+        });
+    }
+
     public ShoppingProducts newInstance(int priceTotalEntradas){
         ShoppingProducts fragment = new ShoppingProducts();
         Bundle args = new Bundle();
@@ -252,10 +307,6 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
     public void onMovieClick(String schedule, Button button) {
         Toast.makeText(getActivity(), schedule, Toast.LENGTH_SHORT).show();
         horario = schedule;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("horario",horario);
-        editor.apply();
     }
 
 
@@ -299,7 +350,8 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
                             CinemaResponse selectedCine = cines.get(position - 1);
                             cinemaCode = selectedCine.getCinemaCode();
                             cinemaName = cines.get(position - 1).getName() + " - " + cines.get(position - 1).getAddress();
-                            saveCinemaSharedPreference(cinemaCode, cinemaName);
+                            precio = (int)Double.parseDouble(selectedCine.getTicketPrice());
+                            saveCinemaSharedPreference(cinemaCode, cinemaName, precio);
                         }
                     }
                     @Override
@@ -331,11 +383,12 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
 
     }
 
-    private void saveCinemaSharedPreference(String cinemaCode, String cinemaName) {
+    private void saveCinemaSharedPreference(String cinemaCode, String cinemaName, int precio) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("cinemaCode", cinemaCode);
         editor.putString("cinemaName", cinemaName);
+        editor.putInt("cinemaPrice", precio);
         editor.apply();
     }
     private void getCinemasFromBackend(final TicketPurchase.CinemaCallback callback) {

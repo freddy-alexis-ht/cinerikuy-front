@@ -2,9 +2,11 @@ package com.cinerikuy.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -41,6 +43,8 @@ public class Login extends AppCompatActivity {
     private EditText usernameText, passwordText;
     private TextInputLayout layoutPassword;
     private ICustomer customerService;
+    private ProgressDialog progressDialog;
+    boolean isLogin = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(getSupportActionBar() != null)
@@ -81,12 +85,14 @@ public class Login extends AppCompatActivity {
         });
     }
     public void login(CustomerLoginRequest request) {
+        showProgressDialog("Validando...");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constans.BACKEND_CUSTOMER)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         customerService = retrofit.create(ICustomer.class);
         Call<CustomerResponse> call = customerService.login(request);
+
         call.enqueue(new Callback<CustomerResponse>() {
             @Override
             public void onResponse(Call<CustomerResponse> call, Response<CustomerResponse> response) {
@@ -97,7 +103,7 @@ public class Login extends AppCompatActivity {
                         ApiExceptionResponse errorResponse = gson.fromJson(response.errorBody().string(), ApiExceptionResponse.class);
                         if (errorResponse != null) {
                             String detail = errorResponse.getDetail();
-                            Toast.makeText(Login.this, detail, Toast.LENGTH_SHORT).show();
+                            delayAndStartNavigationActivity(detail, isLogin);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -107,17 +113,15 @@ public class Login extends AppCompatActivity {
                 } else {
                     CustomerResponse rs = response.body();
                     assert rs != null;
-                    Toast.makeText(Login.this, "Bienvenido " + rs.getUsername(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Login.this, NavigationActivity.class);
-                    intent.putExtra("username",rs.getUsername());
-                    saveSharedPreferences(rs.getUsername());
-                    startActivity(intent);
-                    finish();
+                    isLogin = true;
+                    delayAndStartNavigationActivity(rs.getUsername(), isLogin);
                 }
             }
             @Override
             public void onFailure(Call<CustomerResponse> call, Throwable t) {
                 Log.e("Throw Error:", t.getMessage());
+                progressDialog.dismiss();
+                Toast.makeText(Login.this, "Presenta problemas de conexion", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -144,4 +148,31 @@ public class Login extends AppCompatActivity {
 
         }
     };
+
+    public void showProgressDialog(String message) {
+        progressDialog = new ProgressDialog(Login.this);
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void delayAndStartNavigationActivity(String userName, boolean isLogin) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+                if (isLogin) {
+                    Intent intent = new Intent(Login.this, NavigationActivity.class);
+                    intent.putExtra("username",userName);
+                    saveSharedPreferences(userName);
+                    startActivity(intent);
+                    Toast.makeText(Login.this, "Bienvenido " + userName, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(Login.this, userName, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        },3000);
+    }
 }

@@ -60,7 +60,7 @@
     <string name="local_purchase">Local:</string>
     <string name="horario_purchase">Horario:</string>
     <string name="title_cant_entradas">Cantidad de Entradas</string>
-    <string name="unid_entradas">unid. de entradas</string>
+    <string name="unid_entradas">unid. de</string>
     <string name="title_cant_products">Cantidad de Productos</string>
     <string name="unid_productos">unid. de productos</string>
     <string name="btn_volver">Volver</string>

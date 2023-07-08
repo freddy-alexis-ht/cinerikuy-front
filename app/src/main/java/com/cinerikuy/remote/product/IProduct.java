@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface IProduct {
 
-    @GET("products")
+    @GET("/products")
     Call<List<ProductResponse>> findAll();
 }
