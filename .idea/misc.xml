@@ -12,6 +12,7 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/CineRikuy/app/src/main/res/layout/activity_main.xml" value="0.28442028985507245" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable-anydpi/btn_comprar2.xml" value="0.271" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable-mdpi/bg_horario_selected.xml" value="0.2725" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.268" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/bg_filter_location.xml" value="0.3265" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/bg_horario.xml" value="0.2735" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/bg_ticket.xml" value="0.271" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/default_indicator.xml" value="0.1935" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/gradient_bg.xml" value="0.1935" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/ic_home.xml" value="0.2325" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/ic_launcher_background.xml" value="0.268" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/ic_movie.xml" value="0.229" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/ic_out.xml" value="0.2305" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/drawable/ic_play.xml" value="0.2305" />
@@ -45,6 +47,8 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_movie.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_movie_player.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_product.xml" value="0.30085470085470084" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_shopping.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_shopping_products.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/fragment_ticket_purchase.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/item_actors.xml" value="0.30085470085470084" />
@@ -52,11 +56,14 @@
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/item_product.xml" value="0.2123931623931624" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/item_product_details.xml" value="0.3" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/layout_filter_location.xml" value="0.30085470085470084" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/layout_product_detail.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/layout_purchase_detail.xml" value="0.3" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/nav_header.xml" value="0.27717391304347827" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/slide_item.xml" value="0.3" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/layout/style_spinner.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/menu/nav_menu.xml" value="0.3" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.197" />
+        <entry key="..\:/Users/user/Desktop/CineRikuy_/cinerikuy-front/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.197" />
       </map>
     </option>
   </component>

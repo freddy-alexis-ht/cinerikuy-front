@@ -66,7 +66,6 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
     private int totalEntradas;
     private Button btnCancelar, btnPagar;
     private ITransaction transactionService;
-    //private HashMap<String, Integer> listProductAdd = new HashMap<>();
     private String codeTransaction;
     private double totalPago;
     private List<ProductResponse> productAdd = new ArrayList<>();
