@@ -2,6 +2,7 @@ package com.cinerikuy.presenter;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -270,6 +272,16 @@ public class Home extends Fragment implements MovieItemClickListener {
         transaction.addToBackStack(null);
         transaction.addSharedElement(moviImageView, "sharedName");
         transaction.commit();
+
+        //Guardamos en SharedPreferences los atributos necesarios
+        saveMovieSharedPreferences(movie);
+    }
+    public void saveMovieSharedPreferences(MovieBillboardResponse movie) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("movieName", movie.getName());
+        editor.putString("movieCode", movie.getMovieCode());
+        editor.apply();
     }
     /**
      * Metodo que carga los atributos para ser enviados a otro fragment

@@ -4,6 +4,7 @@ public class Constans {
     public static final String BACKEND_CUSTOMER = "http://192.168.1.41:8080/customers/";
     public static final String BACKEND_MOVIE = "http://192.168.1.41:8080/movies/";
     public static final String BACKEND_CINEMA = "http://192.168.1.41:8080/";
+    public static final String BACKEND_PRODUCTS = "http://192.168.1.41:8080/";
     public static final String MESSAGE_OBLIGATORIO = "Campo obligatorio";
     public static final String MESSAGE_ALL_OBLIGATORIO = "Los campos son obligatorios";
     public static final String REGEX_USERNAME = "^(?=.*[a-zA-Z])(?=.*[0-9]).+$";

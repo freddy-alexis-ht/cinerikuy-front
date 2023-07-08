@@ -3,7 +3,9 @@ package com.cinerikuy.presenter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -107,6 +109,8 @@ public class Login extends AppCompatActivity {
                     assert rs != null;
                     Toast.makeText(Login.this, "Bienvenido " + rs.getUsername(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, NavigationActivity.class);
+                    intent.putExtra("username",rs.getUsername());
+                    saveSharedPreferences(rs.getUsername());
                     startActivity(intent);
                     finish();
                 }
@@ -116,6 +120,12 @@ public class Login extends AppCompatActivity {
                 Log.e("Throw Error:", t.getMessage());
             }
         });
+    }
+    private void saveSharedPreferences(String user) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", user);
+        editor.apply();
     }
     TextWatcher textWatcher = new TextWatcher() {
         @Override

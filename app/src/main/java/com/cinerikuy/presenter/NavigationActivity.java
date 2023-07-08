@@ -9,9 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cinerikuy.R;
@@ -42,7 +46,15 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             navigationView.setCheckedItem(R.id.home);
         }
 
+        //Obtenemos referencia del encabezado
+        View headerView = navigationView.getHeaderView(0);
+        TextView userName = headerView.findViewById(R.id.username);
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("username");
+        userName.setText(user);
     }
+
+
 
     @SuppressLint("NonConstantResourceId")
     @Override

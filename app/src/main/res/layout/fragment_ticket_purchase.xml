@@ -134,7 +134,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Local del cine"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_local"/>
@@ -192,7 +192,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintTop_toBottomOf="@+id/idioma_movie"/>
-
+        <!--Horarios del cine -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_schedules"
             android:layout_width="match_parent"
@@ -202,10 +202,162 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/idioma_movie" />
-        <!--Horarios del cine -->
-
 
         <!--Linea de separación -->
+        <View
+            android:id="@+id/separator1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#FDFDFD"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/rv_schedules"/>
+
+        <TextView
+            android:id="@+id/cantidad_Ticket"
+            android:layout_width="0dp"
+            android:textColor="#D9D9D9"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/title_cantidad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separator1"/>
+
+        <LinearLayout
+            android:id="@+id/incrementar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/cantidad_Ticket">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_baseline_airplane_ticket_24"/>
+            <TextView
+                android:id="@+id/texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:textColor="#fff"
+                android:text="@string/tickets"/>
+
+            <TextView
+                android:id="@+id/incremento"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:enabled="false"
+                android:textColor="#fff"
+                android:background="@drawable/bg_ticket"
+                android:text="0"
+                android:textAlignment="center"/>
+
+            <ImageView
+                android:id="@+id/btn_minimize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_minus"/>
+
+            <ImageView
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_baseline_add_24"/>
+        </LinearLayout>
+
+        <!--Linea de separación -->
+        <View
+            android:id="@+id/separator2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#FDFDFD"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/incrementar"/>
+
+        <TextView
+            android:id="@+id/title_Total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/title_total"
+            android:textColor="#D9D9D9"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separator2" />
+
+        <TextView
+            android:id="@+id/cantidad_total"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_ticket"
+            android:lineSpacingExtra="4dp"
+            android:text="S/.0.00"
+            android:textColor="#BAAEAE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/title_Total"/>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cantidad_total">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15sp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_cancelar2"
+                android:text="Cancelar"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_accept"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_comprar2"
+                android:text="Continuar"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
