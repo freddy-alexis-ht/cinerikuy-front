@@ -52,5 +52,16 @@
     <string name="title_total">Total</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_continue">Continuar</string>
+    <string name="tickets">Tickets</string>
 
+    <!--Purchase Detail -->
+    <string name="title_purchase">Detalle de Compra</string>
+    <string name="movie_purchase">Pelicula:</string>
+    <string name="local_purchase">Local:</string>
+    <string name="horario_purchase">Horario:</string>
+    <string name="title_cant_entradas">Cantidad de Entradas</string>
+    <string name="unid_entradas">unid. de</string>
+    <string name="title_cant_products">Cantidad de Productos</string>
+    <string name="unid_productos">unid. de productos</string>
+    <string name="btn_volver">Volver</string>
 </resources>

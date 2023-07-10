@@ -2,6 +2,7 @@ package com.cinerikuy.presenter;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -43,6 +45,7 @@ import com.cinerikuy.remote.movie.model.MovieBillboardResponse;
 import com.cinerikuy.remote.movie.model.MovieDetailsResponse;
 import com.cinerikuy.utilty.Constans;
 import com.cinerikuy.utilty.Slider;
+import com.cinerikuy.utilty.Utils;
 import com.cinerikuy.utilty.adapters.MovieAdapter;
 import com.cinerikuy.utilty.adapters.SliderPagerAdapter;
 import com.cinerikuy.utilty.listener.MovieItemClickListener;
@@ -137,11 +140,8 @@ public class Home extends Fragment implements MovieItemClickListener {
                         if (position > 0) {
                             CinemaResponse selectedCine = cines.get(position - 1);
                             cinemaCode = selectedCine.getCinemaCode();
-
-                            //Toast.makeText(getActivity(), "Codigo de Cine: " + cinemaCode, Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -188,6 +188,7 @@ public class Home extends Fragment implements MovieItemClickListener {
             public void onResponse(Call<List<MovieBillboardResponse>> call, Response<List<MovieBillboardResponse>> response) {
                 if (response.isSuccessful()) {
                     List<MovieBillboardResponse> movies = response.body();
+                    Utils.logResponse(movies);
                     updateMovieList(movies);
                 }
 
@@ -205,7 +206,8 @@ public class Home extends Fragment implements MovieItemClickListener {
 
             @Override
             public void onFailure(Call<List<MovieBillboardResponse>> call, Throwable t) {
-
+                Toast.makeText(getActivity(), "Error al cargar las peliculas", Toast.LENGTH_SHORT).show();
+                Log.e("Home - Movies", t.getMessage());
             }
         });
     }
@@ -255,7 +257,7 @@ public class Home extends Fragment implements MovieItemClickListener {
      */
     @Override
     public void onMovieClick(MovieBillboardResponse movie, ImageView moviImageView) {
-        Toast.makeText(getActivity(), "Item click: " + movie.getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item click: " + movie.getName(), Toast.LENGTH_SHORT).show();
         Fragment fragmentDetailMovie = newInstance(movie);
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -270,6 +272,16 @@ public class Home extends Fragment implements MovieItemClickListener {
         transaction.addToBackStack(null);
         transaction.addSharedElement(moviImageView, "sharedName");
         transaction.commit();
+
+        //Guardamos en SharedPreferences los atributos necesarios
+        saveMovieSharedPreferences(movie);
+    }
+    public void saveMovieSharedPreferences(MovieBillboardResponse movie) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("movieName", movie.getName());
+        editor.putString("movieCode", movie.getMovieCode());
+        editor.apply();
     }
     /**
      * Metodo que carga los atributos para ser enviados a otro fragment
@@ -331,12 +343,14 @@ public class Home extends Fragment implements MovieItemClickListener {
             public void onResponse(Call<List<MovieBillboardResponse>> call, Response<List<MovieBillboardResponse>> response) {
                 if(response.isSuccessful()) {
                     List<MovieBillboardResponse> movies = response.body();
+                    Utils.logResponse(movies);
                     initMoviesPopular(movies);
                 }
             }
             @Override
             public void onFailure(Call<List<MovieBillboardResponse>> call, Throwable t) {
-                Log.e("ERROR", "ERROR CARGANDO LAS IMAGENES");
+                Toast.makeText(getActivity(), "Ocurrio un error al cargar las imagenes", Toast.LENGTH_SHORT).show();
+                Log.e("ERROR CARGANDO LAS IMAGENES", t.getMessage());
             }
         });
     }
