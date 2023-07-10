@@ -5,15 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.cinerikuy.R;
 import com.cinerikuy.remote.product.model.ProductResponse;
 import com.cinerikuy.utilty.listener.ChangeNumberItemListener;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -38,9 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.title.setText(products.get(position).getName());
         holder.priceUnit.setText(String.valueOf(products.get(position).getPrice()));
         String imgUrl = products.get(position).getImageUrl();
-        Glide.with(holder.itemView.getContext())
-                .load(imgUrl)
-                .into(holder.pic);
+        holder.picCine.setImageURI(imgUrl);
 
         double total = products.get(position).getPrecioTotal();
 
@@ -93,13 +94,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView title, priceUnit;
-        ImageView pic, plusItem, minusItem;
+        ImageView plusItem, minusItem;
+        SimpleDraweeView picCine;
         TextView precioTotal, cantidad;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.nameProduct);
             priceUnit = itemView.findViewById(R.id.feeEachItem);
-            pic = itemView.findViewById(R.id.picCine);
+            picCine = itemView.findViewById(R.id.picCine);
             plusItem = itemView.findViewById(R.id.plusBtn);
             minusItem = itemView.findViewById(R.id.minusBtn);
             precioTotal = itemView.findViewById(R.id.totalEachItem);

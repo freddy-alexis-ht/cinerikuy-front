@@ -43,7 +43,6 @@ public class DetailsMovie extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_details_movie, container, false);
         iniView(view);
 
@@ -51,9 +50,9 @@ public class DetailsMovie extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 //Regresar al fragmento anterior
-                getParentFragmentManager().popBackStack();;
+                getParentFragmentManager().popBackStack();
                 //Cerrar el fragmento actual
-                // getParentFragmentManager().beginTransaction().remove(YourFragment.this).commit();
+                //getParentFragmentManager().beginTransaction().remove(YourFragment.this).commit();
             }
         });
 

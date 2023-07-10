@@ -39,6 +39,7 @@ import com.cinerikuy.remote.transaction.model.TransactionTicketRequest;
 import com.cinerikuy.utilty.Constans;
 import com.cinerikuy.utilty.adapters.ProductAdapter;
 import com.cinerikuy.utilty.listener.ChangeNumberItemListener;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -70,10 +71,12 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
     private double totalPago;
     private List<ProductResponse> productAdd = new ArrayList<>();
     private ProgressDialog progressDialog;
+    LinearLayout linearLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopping_products, container, false);
+        Fresco.initialize(getActivity());
         init(view);
         getProductsFromBackend();
         txtTotalCine.setText("S/."+String.valueOf(totalEntradas) + ".0");
@@ -81,7 +84,11 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
         String preciTotalEntradas = sharedPreferences.getString("precioTotal","");
         txtTotal.setText("S/."+preciTotalEntradas + ".0");
         btnCancelar.setOnClickListener(v -> {
-
+            Toast.makeText(getActivity(), "Cancelando Operación", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(), NavigationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
 
         btnPagar.setOnClickListener(v -> {
@@ -101,6 +108,7 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
         scrollView = view.findViewById(R.id.scrollView1);
         btnPagar = view.findViewById(R.id.btn_accept);
         btnCancelar = view.findViewById(R.id.btn_cancel);
+        linearLayout = view.findViewById(R.id.layout_linear);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -141,6 +149,7 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
         recyclerViewList.setLayoutManager(linearLayoutManager);
         adapter = new ProductAdapter(productResponses, this);
         recyclerViewList.setAdapter(adapter);
+        linearLayout.setVisibility(View.VISIBLE);
     }
 
 
@@ -342,6 +351,7 @@ public class ShoppingProducts extends Fragment implements ChangeNumberItemListen
                 //Ir al fragmento Home
                 getActivity().finish();
                 Intent intent = new Intent(getActivity(), NavigationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 Toast.makeText(getActivity(), "Compra realizada", Toast.LENGTH_SHORT).show();
             }

@@ -59,4 +59,10 @@ dependencies {
 
     //Dependencia de API YOUTUBE
     //implementation 'com.google.android.youtube:youtube-android-player:15.0.1' // Reemplaza con la versión más reciente
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
+
+    implementation 'com.facebook.fresco:fresco:2.5.0'
 }

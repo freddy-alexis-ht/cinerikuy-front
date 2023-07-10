@@ -88,9 +88,4 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
 }

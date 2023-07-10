@@ -2,6 +2,7 @@ package com.cinerikuy;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.cinerikuy.presenter.DetailsMovie;
 import com.cinerikuy.presenter.Home;
+import com.cinerikuy.presenter.NavigationActivity;
 import com.cinerikuy.remote.cinema.ICinema;
 import com.cinerikuy.remote.cinema.model.Cinema;
 import com.cinerikuy.remote.cinema.model.CinemaResponse;
@@ -45,6 +47,7 @@ import com.cinerikuy.remote.movie.model.Schedule;
 import com.cinerikuy.remote.transaction.ITransaction;
 import com.cinerikuy.remote.transaction.model.TransactionTicketRequest;
 import com.cinerikuy.utilty.Constans;
+import com.cinerikuy.utilty.Utils;
 import com.cinerikuy.utilty.adapters.ScheduleAdapter;
 import com.cinerikuy.utilty.listener.ScheduleItemClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -89,20 +92,16 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
         initView(view);
         btnCancel.setOnClickListener(cancel -> {
             Toast.makeText(getActivity(), "Cancelando Operación", Toast.LENGTH_SHORT).show();
-            Fragment fragmentDetailMovie = new Home();
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.fragment_container, fragmentDetailMovie);
-            //transaction.addToBackStack(null);
-            transaction.commit();
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(), NavigationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
 
         btnContinuar.setOnClickListener(next -> {
             String name = nameLocal.getText().toString();
             int cant = Integer.parseInt(txtCantidad.getText().toString());
             if (!StringUtils.isBlank(name) && !StringUtils.isBlank(horario) && cant >0) {
-                Toast.makeText(getActivity(), "Campos elegidos - " + horario, Toast.LENGTH_SHORT).show();
-
                 //Guardamos en SharedPreference
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -189,8 +188,7 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()) {
                     String result = response.body();
-                    Log.i("RESPONSE", result);
-                    Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+                    Utils.logResponse(result);
                 }
             }
 
@@ -241,13 +239,18 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
                 long minutos = l/1000/60;
                 long seconds = (l/1000) % 60;
                 String timeLeftFormatted = String.format("%02d:%02d",minutos, seconds);
-                duration.setText(timeLeftFormatted);
+                duration.setText("Tiempo restante: "+timeLeftFormatted);
             }
 
             @Override
             public void onFinish() {
                 duration.setText("00:00");
                 Toast.makeText(getActivity(), "Tiempo Terminado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Cancelando Operación", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+                Intent intent = new Intent(getActivity(), NavigationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         };
         countDownTimer.start();
@@ -305,7 +308,7 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
 
     @Override
     public void onMovieClick(String schedule, Button button) {
-        Toast.makeText(getActivity(), schedule, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), schedule, Toast.LENGTH_SHORT).show();
         horario = schedule;
     }
 
@@ -373,8 +376,6 @@ public class TicketPurchase extends Fragment implements ScheduleItemClickListene
             @Override
             public void onClick(View view) {
                 //Cerrar el dialog y aplicar el filtro para mostrar las peliculas
-                Toast.makeText(getActivity(), "Aplicando filtro: " + cinemaCode, Toast.LENGTH_SHORT).show();
-                //getDetalleCinema(cinemaCode);
                 nameLocal.setText(cinemaName);
                 dialog.dismiss();
             }

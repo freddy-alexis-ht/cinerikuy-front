@@ -24,6 +24,7 @@ import com.cinerikuy.remote.customer.exceptions.ApiExceptionResponse;
 import com.cinerikuy.remote.customer.model.CustomerLoginRequest;
 import com.cinerikuy.remote.customer.model.CustomerResponse;
 import com.cinerikuy.utilty.Constans;
+import com.cinerikuy.utilty.Utils;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
@@ -85,7 +86,8 @@ public class Login extends AppCompatActivity {
         });
     }
     public void login(CustomerLoginRequest request) {
-        showProgressDialog("Validando...");
+        Utils.logRequest(request);
+        showProgressDialog("Iniciando Sesion...");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constans.BACKEND_CUSTOMER)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -103,6 +105,7 @@ public class Login extends AppCompatActivity {
                         ApiExceptionResponse errorResponse = gson.fromJson(response.errorBody().string(), ApiExceptionResponse.class);
                         if (errorResponse != null) {
                             String detail = errorResponse.getDetail();
+                            Utils.logResponse(errorResponse);
                             delayAndStartNavigationActivity(detail, isLogin);
                         }
                     } catch (IOException e) {
@@ -114,6 +117,7 @@ public class Login extends AppCompatActivity {
                     CustomerResponse rs = response.body();
                     assert rs != null;
                     isLogin = true;
+                    Utils.logResponse(rs);
                     delayAndStartNavigationActivity(rs.getUsername(), isLogin);
                 }
             }

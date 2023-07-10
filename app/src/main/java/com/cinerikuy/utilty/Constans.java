@@ -1,8 +1,8 @@
 package com.cinerikuy.utilty;
 
 public class Constans {
-    public static final String BASE_URL = "https://f887-179-6-168-33.ngrok-free.app/";
-    //public static final String BASE_URL = "http://192.168.1.41:8080/";
+    //public static final String BASE_URL = "https://f887-179-6-168-33.ngrok-free.app/";
+    public static final String BASE_URL = "http://192.168.1.41:8080/";
     public static final String BACKEND_CUSTOMER = BASE_URL + "customers/";
     public static final String BACKEND_MOVIE = BASE_URL+"movies/";
     public static final String BACKEND_CINEMA = BASE_URL;
