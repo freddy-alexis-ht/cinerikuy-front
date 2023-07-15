@@ -66,4 +66,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
 
     implementation 'com.facebook.fresco:fresco:2.5.0'
+
+    //Dependencia para BiometricAuthentication
+    implementation 'androidx.biometric:biometric:1.1.0'
+    //Dependencia de animacion
+    implementation 'com.airbnb.android:lottie:3.0.1'
 }

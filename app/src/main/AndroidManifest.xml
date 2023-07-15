@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Informative"
+            android:exported="false" />
+        <activity
+            android:name=".HowUse"
+            android:exported="false" />
+        <activity
             android:name=".presenter.NavigationActivity"
             android:exported="false" />
         <activity
