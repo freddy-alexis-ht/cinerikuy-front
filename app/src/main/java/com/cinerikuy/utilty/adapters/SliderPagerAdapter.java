@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.cinerikuy.R;
 import com.cinerikuy.utilty.Slider;
 import com.google.android.material.tabs.TabLayout;
@@ -46,8 +47,13 @@ public class SliderPagerAdapter extends RecyclerView.Adapter<SliderPagerAdapter.
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         Slider slide = mList.get(position);
-        holder.slideImage.setImageResource(slide.getImage());
+
+        //holder.slideImage.setImageResource(slide.getImage());
         holder.slideText.setText(slide.getTitle());
+        String imgUrl = slide.getImage();
+        Glide.with(holder.itemView.getContext())
+                .load(imgUrl)
+                .into(holder.slideImage);
     }
 
     @Override

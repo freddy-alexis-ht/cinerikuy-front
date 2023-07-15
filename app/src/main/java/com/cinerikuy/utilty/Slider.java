@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Slider {
-    private int image;
+    private String image;
     private String title;
 }

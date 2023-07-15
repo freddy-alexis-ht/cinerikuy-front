@@ -1,5 +1,6 @@
 package com.cinerikuy.presenter;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,10 @@ import com.cinerikuy.TicketPurchase;
 import com.cinerikuy.remote.movie.IMovie;
 import com.cinerikuy.remote.movie.model.MovieDetailsResponse;
 import com.cinerikuy.utilty.Constans;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +50,6 @@ public class DetailsMovie extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_details_movie, container, false);
         iniView(view);
-
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -55,6 +59,12 @@ public class DetailsMovie extends Fragment {
                 //getParentFragmentManager().beginTransaction().remove(YourFragment.this).commit();
             }
         });
+        //Obtenemos los valores del SharedPreferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean isEstreno = sharedPreferences.getBoolean("isEstreno",false);
+        if(isEstreno) {
+            btnComprar.setVisibility(View.GONE);
+        }
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +72,7 @@ public class DetailsMovie extends Fragment {
                 requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 Fragment fragmentDetailMovie = newInstance(movieUrlTrailer.getText().toString());
 
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, fragmentDetailMovie);
                 fragmentTransaction.addToBackStack(null);
@@ -153,7 +163,11 @@ public class DetailsMovie extends Fragment {
         });
     }
     public void showMovieDetails(MovieDetailsResponse movie) {
-        Glide.with(getActivity()).load(movie.getImageUrl()).into(movieImageView);
+        if (getActivity()!=null) {
+            Glide.with(requireContext()).load(movie.getImageUrl()).into(movieImageView);
+            Glide.with(getContext()).load(movie.getImageCover()).into(movieTrailer);
+            movieTrailer.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_animation));
+        }
         movieName.setText(movie.getName());
         movieSinopsis.setText(movie.getSynopsis());
         movieGenero.setText(movie.getGenre());
@@ -162,8 +176,7 @@ public class DetailsMovie extends Fragment {
         movieUrlTrailer.setText(movie.getTrailerUrl());
         movieDuration.setText("Duración: " + movie.getDuration());
         movieActors.setText(movie.getActors());
-        Glide.with(getActivity()).load(movie.getImageCover()).into(movieTrailer);
         //Animations
-        movieTrailer.setAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.scale_animation));
+
     }
 }

@@ -64,4 +64,10 @@
     <string name="title_cant_products">Cantidad de Productos</string>
     <string name="unid_productos">unid. de productos</string>
     <string name="btn_volver">Volver</string>
+
+    <!--My Shoppings-->
+    <string name="title_transaction">Transacción:</string>
+    <string name="title_local">Local:</string>
+    <string name="title_fecha">Fecha:</string>
+
 </resources>

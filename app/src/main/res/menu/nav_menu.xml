@@ -19,7 +19,7 @@
         <item
             android:id="@+id/vote"
             android:title="@string/vote"
-            android:icon="@drawable/ic_vote"/>
+            android:icon="@drawable/ic_vote_option"/>
     </group>
     <item
         android:title="@string/account">

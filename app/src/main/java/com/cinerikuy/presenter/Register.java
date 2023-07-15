@@ -2,8 +2,10 @@ package com.cinerikuy.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -38,6 +40,8 @@ public class Register extends AppCompatActivity {
     private TextInputLayout layoutPassword;
     private ICustomer customerService;
     private boolean isValid;
+    private ProgressDialog progressDialog;
+    boolean isRegister = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(getSupportActionBar() != null)
@@ -88,6 +92,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void sigInUser(CustomerSignInRequest request) {
+        showProgressDialog("Registrando...");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constans.BACKEND_CUSTOMER)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -103,7 +108,7 @@ public class Register extends AppCompatActivity {
                         ApiExceptionResponse errorResponse = gson.fromJson(response.errorBody().string(), ApiExceptionResponse.class);
                         if (errorResponse != null) {
                             String detail = errorResponse.getDetail();
-                            Toast.makeText(Register.this,detail, Toast.LENGTH_SHORT).show();
+                            delayAndStartLoginActivity(detail, isRegister);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -113,10 +118,8 @@ public class Register extends AppCompatActivity {
 
                 CustomerResponse rs = response.body();
                 assert rs != null;
-                Toast.makeText(Register.this, "Usuario "+rs.getUsername() + " registrado correctamente", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Register.this, Login.class);
-                startActivity(intent);
-                finish();
+                isRegister = true;
+                delayAndStartLoginActivity(rs.getUsername(), isRegister);
             }
 
             @Override
@@ -165,6 +168,31 @@ public class Register extends AppCompatActivity {
     private String getTextAndValidate(EditText editText, String mandatoryMessage, String invalidMessage,
                                       String regex) {
         return getTextAndValidate(editText, mandatoryMessage, invalidMessage,regex,0);
+    }
+
+    public void showProgressDialog(String message) {
+        progressDialog = new ProgressDialog(Register.this);
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    private void delayAndStartLoginActivity(String userName, boolean isLogin) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+                if (isLogin) {
+                    Intent intent = new Intent(Register.this, Login.class);
+                    startActivity(intent);
+                    Toast.makeText(Register.this, "Registrado " + userName, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(Register.this, userName, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        },3000);
     }
 
 }

@@ -83,10 +83,10 @@ public class Home extends Fragment implements MovieItemClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         lstSlides = new ArrayList<>();
-        lstSlides.add(new Slider(R.drawable.slide1, "Slide Title1"));
-        lstSlides.add(new Slider(R.drawable.slide2, "Slide Title2"));
-        lstSlides.add(new Slider(R.drawable.slide1, "Slide Title1"));
-        lstSlides.add(new Slider(R.drawable.slide2, "Slide Title2"));
+        lstSlides.add(new Slider(Constans.URL_ELEMENTAL, "Elemental"));
+        lstSlides.add(new Slider(Constans.URL_FLASH, "The Flash"));
+        lstSlides.add(new Slider(Constans.URL_INDIANA, "Indiana Jones 5"));
+        lstSlides.add(new Slider(Constans.URL_KRAKEN_SIRENAS, "Krakens y Sirenas"));
         initView(view);
         SliderPagerAdapter adapter = new SliderPagerAdapter(sliderpager,lstSlides, indicator);
         sliderpager.setAdapter(adapter);
@@ -281,6 +281,7 @@ public class Home extends Fragment implements MovieItemClickListener {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("movieName", movie.getName());
         editor.putString("movieCode", movie.getMovieCode());
+        editor.putBoolean("isEstreno", false);
         editor.apply();
     }
     /**
